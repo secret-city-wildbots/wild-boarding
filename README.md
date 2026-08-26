@@ -61,6 +61,8 @@ The goal of this section is to do the following:
 1. Be able to use the Driverstation
 1. Understand & Modify the simple template code given
 
+This tutorial assumes that you have a basic understanding of the Java programming language, or at least a similar language like JavaScript or Rust. If you don't have experience with java, 
+
 ### Setup VSCode
 
 To be able to use VSCode with this example, you will need to make sure you open VSCode to the specific folder, below are the steps:
@@ -87,6 +89,8 @@ The main code lives in the `src/main/java/frc/robot` directory. There are 4 file
   - RobotContainer.java
     - This is a class that contains all of the robot's subsystems and their corresponding classes
     - Also contains the controller instance and all of it's bindings
+  - Constants.java
+   - This contains all of the constants (such as CanID's and speeds)
 
 
 you will notice on lines 24 - 27 in `Robot.java` the following code:
@@ -119,3 +123,43 @@ The `init` function(s), will typically be called once that mode starts, such as 
 1. On the DriverStation, make sure `TeleOperated` is selected and then click the `Enable` button
    ![Driver Station](images/00-sim-hello-world-3.png)
 1. Once Enabled, press the `A` button on the controller, and it should log `A WAS PRESSED` in the terminal of VSCode. IT WILL NOT LOG IN THE DRIVERSTATION.
+
+### A Closer Look at Robot Container
+
+The `RobotContainer` class is a simple way to organize your commands and bindings for the robot.  The `configureBindings()` method is where you define how the controller buttons should control the robot. In this example, pressing the `A` button on the controller will run a command that logs "A WAS PRESSED" to the terminal of VSCode. 
+
+```java
+public class RobotContainer {
+
+  private final CommandXboxController joystick = new CommandXboxController(0);
+
+  private int counter = 0;
+
+  public RobotContainer() {
+    configureBindings();
+  }
+
+  private void configureBindings() {
+    joystick.a().onTrue(Commands.runOnce(() -> {
+      System.out.println("A WAS PRESSED");
+    }));
+  }
+}
+```
+
+There's a few parts to a button binding:
+
+1. The button being bound, e.g. `.a()`
+1. The condition under which the command should run, e.g. `.onTrue()`
+2. The command to be run when the condition is met, e.g. `Commands.runOnce(() -> { ... })`
+
+The `runOnce` command will run the given `Runnable`. There are many other types of commands, but that's a lesson for a later day.
+
+For example, take line 21 in `RobotContainer.java`:
+```java
+joystick.a().onTrue(Commands.runOnce(() -> {
+  System.out.println("A WAS PRESSED");
+}));
+```
+
+Try on your own! You can add more bindings to the `configureBindings()` method by using the `joystick` object and calling methods like `a()`, `b()`, `x()`, `y()`, `leftBumper()`, `rightBumper()`, `leftTrigger()`, `rightTrigger()`, etc. You can also change the condition to something like `.whileTrue()` or `.onFalse()`. Remember, you have to enable from the driverstation before the controller will do anything!
