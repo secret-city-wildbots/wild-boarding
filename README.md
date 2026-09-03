@@ -7,44 +7,42 @@
 
 [Back to Contents](#contents)
 
-Below are the minimal steps to get up and running with running Java on our FRC Robots and testbeds using our example code.
+Below are the minimum steps for running Java code on our FRC robots and testbeds with these example projects.
 
 ### Install FRC Game Tools
 
-To be able to control and test with the RoboRIO, we will need to have the following software installed:
+To control and test a RoboRIO, install the following software:
   - FRC Game Tools
     - LabVIEW Update
     - FRC Driver Station
     - FRC RoboRIO Imaging Tool and Images
 
-For detailed documentation on how to install, FIRST has great documentation [here](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/frc-game-tools.html).
+For detailed installation instructions, see FIRST's documentation [here](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/frc-game-tools.html).
 
-### Installing VSCode with WPILib Command Palette
+### Installing VS Code with the WPILib Command Palette
 
-To develop Java code for our robots, we are utilizing a special version of VSCode that has been customized to make FRC Robot development easier.
+To develop Java code for our robots, use the special version of VS Code that includes the WPILib Command Palette and other FRC development tools.
 
-For detailed documentation on how to install, FIRST has great documentation [here](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/wpilib-setup.html).
-  - NOTE: FIRST may not have updated their docs to point to the latest version of VSCode with WPILib, to check for the latest version, you can view it on their Github release page [here](https://github.com/wpilibsuite/vscode-wpilib/releases).
+For detailed installation instructions, see FIRST's documentation [here](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/wpilib-setup.html).
+  - NOTE: FIRST's documentation may not point to the latest WPILib version. Check the latest release on the [WPILib VS Code GitHub page](https://github.com/wpilibsuite/vscode-wpilib/releases).
 
 ### Preparing Your Robot
 
-If you are using hardware (RoboRIO and Radio) that has already been configured, such as Linguini or another robot, you can skip this section. Otherwise, if your RoboRIO and Radio are new, you will need to image and program them respectively.
+This section is only necessary if you are working with physical hardware. You can skip it when running the simulation example. If you are using a RoboRIO and radio that have already been configured, such as Linguini or another robot, you can also skip it. Otherwise, you will need to image and program them.
 
-For detailed documentation on how to this, FIRST has great documentation, below are the links to the documentation for each:
+For detailed instructions, see FIRST's documentation:
   - [Imaging RoboRIO](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-3/roborio2-imaging.html)
   - [Programming Radio](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-3/radio-programming.html)
 
-At this point you should have all the software tools and necessary hardware equipment setup to be able to start working through these examples.
+At this point, you should have the software and, if needed, the hardware required to work through these examples.
 
 ### Clone this repository
 
-To use and work with our examples, you will need to clone this repository from Github. We use [GIT](https://www.git-scm.com) as a version control and the below commands will be for GIT.
-  - NOTE: Windows users may want to install either of the software below:
-    - 4265 Team uses [TortoiseGit](https://tortoisegit.org)
-    - Another alternative is [Git For Windows](https://gitforwindows.org)
+To use these examples, clone this repository from GitHub. Git is the version control software used by this project.
+  - NOTE: Windows users may want to install [TortoiseGit](https://tortoisegit.org) or [Git for Windows](https://gitforwindows.org).
 
-1. Open up a terminal session and navigate to a directory you want to clone the repository.
-1. Use the following command in the terminal to clone this repository:
+1. Open a terminal and navigate to the directory where you want to store the repository.
+1. Run the following command:
    ```bash
    git clone https://github.com/secret-city-wildbots/wild-boarding.git
    ```
@@ -55,31 +53,31 @@ To use and work with our examples, you will need to clone this repository from G
 
 ### Description
 
-The goal of this section is to do the following:
+The goal of this section is to help you:
 
-1. Be able to run code in simulation
-1. Be able to use the Driverstation
-1. Understand & Modify the simple template code given
+1. Run robot code in simulation.
+1. Use the FRC Driver Station with the simulation.
+1. Understand and modify the provided template code.
 
-This tutorial assumes that you have a basic understanding of the Java programming language, or at least a similar language like JavaScript or Rust. If you don't have experience with java, 
+This tutorial assumes that you have a basic understanding of Java or a similar language such as JavaScript or Rust. You do not need a RoboRIO or other physical robot hardware to complete this simulation tutorial.
 
-### Setup VSCode
+### Set Up VS Code
 
-To be able to use VSCode with this example, you will need to make sure you open VSCode to the specific folder, below are the steps:
+Open the `00-sim-hello-world` Gradle project in the WPILib version of VS Code:
 
-  1. launch the WPILIB VSCode application
-  1. While your new window is in focus, Go to `File` -> `Open Folder...`
-  1. Select the directory `00-sim-hello-world`
-  1. Now you should be able to code and utilize all of the features built into the WPILib version of VSCode. Your VSCode should look like something below:
-     ![Example VSCode View](images/00-sim-hello-world-1.png)
+  1. Launch the WPILib version of VS Code.
+  1. Select `File` -> `Open Folder...`.
+  1. Select the repository's `00-sim-hello-world` directory. This directory contains the Gradle project for the example.
+  1. VS Code should now load the project and its WPILib tools. Your window should look similar to the following image:
+    ![Example VS Code view](images/00-sim-hello-world-1.png)
 
 ### Code Overview
 
-The main code lives in the `src/main/java/frc/robot` directory. There are 4 files:
+The main code is in the `src/main/java/frc/robot` directory. It contains four files:
   - Main.java
-     - entry point for the program
+    - The entry point for the program.
   - Robot.java
-    - This contains all of the init and periodic functions for the robot
+    - The robot's initialization and periodic functions:
        - robot
        - autonomous
        - teleop
@@ -87,13 +85,13 @@ The main code lives in the `src/main/java/frc/robot` directory. There are 4 file
        - test
        - simulation
   - RobotContainer.java
-    - This is a class that contains all of the robot's subsystems and their corresponding classes
-    - Also contains the controller instance and all of it's bindings
+    - Contains the robot's subsystems and their corresponding commands.
+    - Also contains the controller instance and all of its bindings.
   - Constants.java
-   - This contains all of the constants (such as CanID's and speeds)
+  - Contains constants such as CAN IDs and speeds.
 
 
-you will notice on lines 24 - 27 in `Robot.java` the following code:
+In `Robot.java`, the `robotInit()` method contains the following code:
 
 ```java
 @Override
@@ -102,7 +100,7 @@ you will notice on lines 24 - 27 in `Robot.java` the following code:
   }
 ```
 
-and 58-61:
+The `teleopInit()` method contains this code:
 
 ```java
  @Override
@@ -111,22 +109,22 @@ and 58-61:
   }
 ```
 
-The `init` function(s), will typically be called once that mode starts, such as `teleopInit` being run whenever the robot is put into teleop mode (enabled), or `robotInit` being called when the robot code starts.
+An `Init` method is typically called once when its mode starts. For example, `teleopInit()` runs when the robot enters teleoperated mode, while `robotInit()` runs when the robot code starts.
 
 ### Running Example
 
-1. In VSCode, you will hit the `...` on the top right and click `Build Robot Code`. You should see `BUILD SUCCESSFUL` in the terminal of VSCode
+1. In VS Code, select `...` in the top-right corner, then select `Build Robot Code`. You should see `BUILD SUCCESSFUL` in the VS Code terminal.
    ![Build Code](images/00-sim-hello-world-2.png)
-1. Now open up the FRC Driver Station and plug in an Xbox controller
-1. In VSCode, you will hit the `...` on the top right again and click `Simulate Robot Code`
-1. The will be a prompt at the top of the window. Ensure `Use Real DriverStation` is selected, then click `ok`
-1. On the DriverStation, make sure `TeleOperated` is selected and then click the `Enable` button
+1. Open the FRC Driver Station and connect an Xbox controller.
+1. In VS Code, select `...` again, then select `Simulate Robot Code`.
+1. When the simulation options prompt appears at the top of the window, select `Use Real Driver Station`, then select `OK`.
+1. In the Driver Station, select `Teleoperated`, then select `Enable`.
    ![Driver Station](images/00-sim-hello-world-3.png)
-1. Once Enabled, press the `A` button on the controller, and it should log `A WAS PRESSED` in the terminal of VSCode. IT WILL NOT LOG IN THE DRIVERSTATION.
+1. Once the robot is enabled, press the `A` button. The message `A WAS PRESSED` should appear in the VS Code terminal, not in the Driver Station.
 
 ### A Closer Look at Robot Container
 
-The `RobotContainer` class is a simple way to organize your commands and bindings for the robot.  The `configureBindings()` method is where you define how the controller buttons should control the robot. In this example, pressing the `A` button on the controller will run a command that logs "A WAS PRESSED" to the terminal of VSCode. 
+The `RobotContainer` class organizes the robot's commands and controller bindings. The `configureBindings()` method defines how controller buttons control the robot. In this example, pressing the `A` button runs a command that logs `A WAS PRESSED` to the VS Code terminal.
 
 ```java
 public class RobotContainer {
@@ -147,7 +145,7 @@ public class RobotContainer {
 }
 ```
 
-There's a few parts to a button binding:
+There are three parts to this button binding:
 
 1. The button being bound, e.g. `.a()`
 1. The condition under which the command should run, e.g. `.onTrue()`
@@ -155,11 +153,11 @@ There's a few parts to a button binding:
 
 The `runOnce` command will run the given `Runnable`. There are many other types of commands, but that's a lesson for a later day.
 
-For example, take line 21 in `RobotContainer.java`:
+For example, the binding in `RobotContainer.java` is:
 ```java
 joystick.a().onTrue(Commands.runOnce(() -> {
   System.out.println("A WAS PRESSED");
 }));
 ```
 
-Try on your own! You can add more bindings to the `configureBindings()` method by using the `joystick` object and calling methods like `a()`, `b()`, `x()`, `y()`, `leftBumper()`, `rightBumper()`, `leftTrigger()`, `rightTrigger()`, etc. You can also change the condition to something like `.whileTrue()` or `.onFalse()`. Remember, you have to enable from the driverstation before the controller will do anything!
+Try adding more bindings to `configureBindings()` by calling methods on the `joystick` object, such as `a()`, `b()`, `x()`, `y()`, `leftBumper()`, `rightBumper()`, `leftTrigger()`, and `rightTrigger()`. You can also change the condition to `.whileTrue()` or `.onFalse()`. Remember to enable the robot in the Driver Station before the controller will do anything.
